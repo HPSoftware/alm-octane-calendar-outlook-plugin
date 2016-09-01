@@ -105,7 +105,7 @@ namespace SharedCalendar
           isLoggedIn = true;
 
           // select the calendar tab 
-          OutlookUtils.SelectCalenderTab();
+          OutlookUtils.SelectCalenderModule();
         }
       }
       if (ribbon != null)

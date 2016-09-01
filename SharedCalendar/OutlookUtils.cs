@@ -103,10 +103,11 @@ namespace SharedCalendar
       return mailItem;
     }
 
-    public static void SelectCalenderTab()
+    public static void SelectCalenderModule()
     {
       var activeExplorer = GetApplication().ActiveExplorer();
-      activeExplorer.CurrentFolder = GetApplication().Session.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
+      var navPane = activeExplorer.NavigationPane;
+      navPane.CurrentModule = navPane.Modules.GetNavigationModule(OlNavigationModuleType.olModuleCalendar);
     }
 
     internal static ICollection<String> GetCalendarList(String selectedCalendar)
@@ -136,7 +137,6 @@ namespace SharedCalendar
           }
         }
       }
-
       return m_calendars.Keys;
     }
 

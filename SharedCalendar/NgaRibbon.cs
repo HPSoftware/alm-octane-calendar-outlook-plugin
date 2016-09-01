@@ -39,184 +39,196 @@ using Office = Microsoft.Office.Core;
 
 namespace SharedCalendar
 {
-    [ComVisible(true)]
-    public class NgaRibbon : Office.IRibbonExtensibility
+  [ComVisible(true)]
+  public class NgaRibbon : Office.IRibbonExtensibility
+  {
+    #region Fields
+
+    private Office.IRibbonUI ribbon;
+    private ConfigurationPersistService persistService = new ConfigurationPersistService();
+    private LoginConfiguration loginConfig;
+    private Boolean isLoggedIn = false;
+
+    #endregion
+
+    #region Public Members
+
+    public NgaRibbon()
     {
-        private Office.IRibbonUI ribbon;
-        ConfigurationPersistService persistService = new ConfigurationPersistService();
-        LoginConfiguration loginConfig;
-        private Boolean isLoggedIn = false;
-
-        public NgaRibbon()
-        {
-          persistService.ConfigurationFileName = "SharedCalendar.configuration";
-        }
-
-        public Boolean GetIsLoggedIn(IRibbonControl control)
-        {
-          return isLoggedIn;
-        }
-
-        public String GetBtnConnectLable(IRibbonControl control)
-        {
-            if (isLoggedIn)
-            {
-                return "Disconnect";
-            }
-            else
-            {
-                return "Connect";
-            }
-        }
-
-        public void OnLogin(Office.IRibbonControl control)
-        {
-          if (isLoggedIn)
-          {
-            // disconnect
-            RestConnector.GetInstance().Disconnect();
-            
-            isLoggedIn = false;
-          }
-          else
-          {
-            // connect
-            SettingsForm form = new SettingsForm();
-            var config = persistService.Load<LoginConfiguration>();
-            var calendarName = config.CalendarName;
-            form.Configuration = config;
-
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-              loginConfig = form.Configuration;
-              loginConfig.CalendarName = calendarName;
-
-              //save last successful configuration
-              persistService.Save(loginConfig);
-              NgaUtils.init(loginConfig.SharedSpaceId, loginConfig.WorkspaceId, loginConfig.ReleaseId);
-              isLoggedIn = true;
-              
-              // select the calendar tab 
-              OutlookUtils.SelectCalenderTab();
-            }
-          }
-          if (ribbon != null)
-          {
-            ribbon.Invalidate();
-          }
-        }
-
-        public void OnSync(Office.IRibbonControl control)
-        {
-            try
-            {
-              SyncForm form = new SyncForm();
-              var config = persistService.Load<LoginConfiguration>();
-              // get calender list and initialize the form
-              ICollection<String> calendars = OutlookUtils.GetCalendarList(config.CalendarName);
-              form.Init(calendars, config);
-
-              if (form.ShowDialog() == DialogResult.OK)
-              {
-                config.CalendarName = form.SelectedCalendar;
-                persistService.Save(config);
-                OutlookUtils.SelectedCalendarName = config.CalendarName;
-                //Get by id
-                Release release = NgaUtils.GetSelectedRelease(); //NgaUtils.GetReleaseById(releaseId);
-                EntityListResult<Sprint> sprints = NgaUtils.GetSprintsByRelease(release.Id);
-                OutlookSyncUtils.SyncSprintsToOutlook(config.CalendarName, release, sprints);
-
-                EntityListResult<Milestone> milestones = NgaUtils.GetMilestonesByRelease(release.Id);
-                OutlookSyncUtils.SyncMilestonesToOutlook(config.CalendarName, release, milestones);
-                String str = String.Format("Sync completed successfully.{0}Summary : {1} sprints and {2} milestones.",
-                    Environment.NewLine, sprints.data.Count, milestones.data.Count);
-                MessageBox.Show(str, "Sync completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-              }
-            }
-            catch (Exception e)
-            {
-              String errorMsg = "Sync failed : " + e.Message + Environment.NewLine + e.StackTrace;
-              MessageBox.Show(errorMsg, "Sync Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public void OnMailReport(Office.IRibbonControl control)
-        {
-            try
-            {
-                //Get by id
-                Release release = NgaUtils.GetSelectedRelease(); //NgaUtils.GetReleaseById(releaseId);
-                GroupResult groupResult = NgaUtils.GetAllDefectWithGroupBy(release.Id);
-                GroupResult usGroupResult = NgaUtils.GetAllStoriesWithGroupBy(release.Id);
-                OutlookSyncUtils.getReleaseMailReport(release, groupResult, usGroupResult);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Failed to generate report: " + e.Message + Environment.NewLine + e.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public Bitmap imageConnect_GetImage(IRibbonControl control)
-        {
-          if (isLoggedIn)
-          {
-            return Resources.disconnect;
-          }
-          return Resources.connect;
-        }
-
-        public Bitmap imageSync_GetImage(IRibbonControl control)
-        {
-          return Resources.sync;
-        }
-
-        public Bitmap imageReport_GetImage(IRibbonControl control)
-        {
-          return Resources.release_report;
-        }
-        #region IRibbonExtensibility Members
-
-        public string GetCustomUI(string ribbonID)
-        {
-          return GetResourceText("SharedCalendar.NgaRibbon.xml");
-        }
-
-        #endregion
-
-        #region Ribbon Callbacks
-        //Create callback methods here. For more information about adding callback methods, visit http://go.microsoft.com/fwlink/?LinkID=271226
-
-        public void Ribbon_Load(Office.IRibbonUI ribbonUI)
-        {
-            this.ribbon = ribbonUI;
-        }
-
-        #endregion
-
-        #region Helpers
-
-        private static string GetResourceText(string resourceName)
-        {
-            Assembly asm = Assembly.GetExecutingAssembly();
-            string[] resourceNames = asm.GetManifestResourceNames();
-            for (int i = 0; i < resourceNames.Length; ++i)
-            {
-                if (string.Compare(resourceName, resourceNames[i], StringComparison.OrdinalIgnoreCase) == 0)
-                {
-                    using (StreamReader resourceReader = new StreamReader(asm.GetManifestResourceStream(resourceNames[i])))
-                    {
-                        if (resourceReader != null)
-                        {
-                            return resourceReader.ReadToEnd();
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-
-        #endregion
-
-
+      Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
+      persistService.ConfigurationFileName = "SharedCalendar.configuration";
+      loginConfig = persistService.Load<LoginConfiguration>();
     }
+
+    public Boolean GetIsLoggedIn(IRibbonControl control)
+    {
+      return isLoggedIn;
+    }
+
+    public String GetBtnConnectLable(IRibbonControl control)
+    {
+      if (isLoggedIn)
+      {
+        return "Disconnect";
+      }
+      else
+      {
+        return "Connect";
+      }
+    }
+
+    public void OnLogin(Office.IRibbonControl control)
+    {
+      if (isLoggedIn)
+      {
+        // disconnect
+        RestConnector.GetInstance().Disconnect();
+
+        isLoggedIn = false;
+      }
+      else
+      {
+        // connect
+        SettingsForm form = new SettingsForm();
+        var calendarName = loginConfig.CalendarName;
+        form.Configuration = loginConfig;
+
+        if (form.ShowDialog() == DialogResult.OK)
+        {
+          loginConfig = form.Configuration;
+          loginConfig.CalendarName = calendarName;
+
+          NgaUtils.init(loginConfig.SharedSpaceId, loginConfig.WorkspaceId, loginConfig.ReleaseId);
+          isLoggedIn = true;
+
+          // select the calendar tab 
+          OutlookUtils.SelectCalenderTab();
+        }
+      }
+      if (ribbon != null)
+      {
+        ribbon.Invalidate();
+      }
+    }
+
+    public void OnSync(Office.IRibbonControl control)
+    {
+      try
+      {
+        SyncForm form = new SyncForm();
+        // get calender list and initialize the form
+        ICollection<String> calendars = OutlookUtils.GetCalendarList(loginConfig.CalendarName);
+        form.Init(calendars, loginConfig);
+
+        if (form.ShowDialog() == DialogResult.OK)
+        {
+          loginConfig.CalendarName = form.SelectedCalendar;
+          OutlookUtils.SelectedCalendarName = loginConfig.CalendarName;
+          //Get by id
+          Release release = NgaUtils.GetSelectedRelease(); //NgaUtils.GetReleaseById(releaseId);
+          EntityListResult<Sprint> sprints = NgaUtils.GetSprintsByRelease(release.Id);
+          OutlookSyncUtils.SyncSprintsToOutlook(loginConfig.CalendarName, release, sprints);
+
+          EntityListResult<Milestone> milestones = NgaUtils.GetMilestonesByRelease(release.Id);
+          OutlookSyncUtils.SyncMilestonesToOutlook(loginConfig.CalendarName, release, milestones);
+          String str = String.Format("Sync completed successfully.{0}Summary : {1} sprints and {2} milestones.",
+              Environment.NewLine, sprints.data.Count, milestones.data.Count);
+          MessageBox.Show(str, "Sync completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+      }
+      catch (Exception e)
+      {
+        String errorMsg = "Sync failed : " + e.Message + Environment.NewLine + e.StackTrace;
+        MessageBox.Show(errorMsg, "Sync Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+    }
+
+    public void OnMailReport(Office.IRibbonControl control)
+    {
+      try
+      {
+        //Get by id
+        Release release = NgaUtils.GetSelectedRelease(); //NgaUtils.GetReleaseById(releaseId);
+        GroupResult groupResult = NgaUtils.GetAllDefectWithGroupBy(release.Id);
+        GroupResult usGroupResult = NgaUtils.GetAllStoriesWithGroupBy(release.Id);
+        OutlookSyncUtils.getReleaseMailReport(release, groupResult, usGroupResult);
+      }
+      catch (Exception e)
+      {
+        MessageBox.Show("Failed to generate report: " + e.Message + Environment.NewLine + e.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+    }
+
+    public Bitmap imageConnect_GetImage(IRibbonControl control)
+    {
+      if (isLoggedIn)
+      {
+        return Resources.disconnect;
+      }
+      return Resources.connect;
+    }
+
+    public Bitmap imageSync_GetImage(IRibbonControl control)
+    {
+      return Resources.sync;
+    }
+
+    public Bitmap imageReport_GetImage(IRibbonControl control)
+    {
+      return Resources.release_report;
+    }
+
+    #endregion
+
+    #region IRibbonExtensibility Members
+
+    public string GetCustomUI(string ribbonID)
+    {
+      return GetResourceText("SharedCalendar.NgaRibbon.xml");
+    }
+
+    #endregion
+
+    #region Ribbon Callbacks
+    //Create callback methods here. For more information about adding callback methods, visit http://go.microsoft.com/fwlink/?LinkID=271226
+
+    public void Ribbon_Load(Office.IRibbonUI ribbonUI)
+    {
+      this.ribbon = ribbonUI;
+    }
+
+    #endregion
+
+    #region Private Members
+
+    private static string GetResourceText(string resourceName)
+    {
+      Assembly asm = Assembly.GetExecutingAssembly();
+      string[] resourceNames = asm.GetManifestResourceNames();
+      for (int i = 0; i < resourceNames.Length; ++i)
+      {
+        if (string.Compare(resourceName, resourceNames[i], StringComparison.OrdinalIgnoreCase) == 0)
+        {
+          using (StreamReader resourceReader = new StreamReader(asm.GetManifestResourceStream(resourceNames[i])))
+          {
+            if (resourceReader != null)
+            {
+              return resourceReader.ReadToEnd();
+            }
+          }
+        }
+      }
+      return null;
+    }
+
+    private void OnApplicationExit(object sender, EventArgs e)
+    {
+      //save last successful configuration
+      persistService.Save(loginConfig);
+    }
+
+    #endregion
+
+
+  }
 }

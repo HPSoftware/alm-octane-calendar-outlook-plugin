@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab id="ngaTab" label="OCTANE">
+        <group id="actions" label="Actions">
+          <button id="btnConnect" getLabel="GetBtnConnectLable" showImage="false" onAction="OnLogin" size="large" getImage="imageConnect_GetImage" />
+          <button id="btnSync" label="Sync" showImage="false" onAction="OnSync" size="large" getImage="imageSync_GetImage" getEnabled="GetIsLoggedIn"/>
+          <button id="btnReport" label="Release Report" showImage="false" onAction="OnMailReport" size="large" getImage="imageReport_GetImage" getEnabled="GetIsLoggedIn"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+

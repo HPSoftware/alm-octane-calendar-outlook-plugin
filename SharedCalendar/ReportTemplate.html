@@ -1,0 +1,104 @@
+﻿<div style="font-size:20px;">
+    <table>
+        <tr>
+            <td style="padding-bottom:25px;border-bottom:1px solid;width:500px;">
+                <h1>Release:</h1>
+                <h2 style="margin-left:30px;">@releasename</h2>
+                <h3 style="margin-left:30px;">
+                    Number Of Sprints: @numofsprints
+                </h3>
+            <td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td style="margin-bottom:25px;border-bottom:1px solid;width:500px;">
+                <table style="table-layout:fixed;">
+                    <tr>
+                        <td>
+                            <h2 style="padding-left:30px;">Open Defects:</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left:50px; margin-bottom:10px;">
+                            Total: @defecttotal
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="padding-left:80px; width:400px;">
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <tr style="padding-bottom:5px;margin-top:5px;">
+                                                <td style="width:100px;">
+                                                    Urgent:
+                                                </td>
+                                                <td style="width: @urgentwidthpx; margin-left: 10px; background-color: @urgentcol;">
+                                                    <span style="padding-left:10px;">@urgentval</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr style="padding-bottom:5px;margin-top:5px;">
+                                                <td style="width:100px;">
+                                                    Very High:
+                                                </td>
+                                                <td style="width: @veryhighwidthpx; margin-left: 10px; background-color: @veryhighcol; ">
+                                                    <span style="padding-left:10px;">@veryhighval</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr style="padding-bottom:5px;margin-top:5px;">
+                                                <td style="width:100px;">
+                                                    High:
+                                                </td>
+                                                <td style="width: @highwidthpx; margin-left: 10px; background-color: @highcol; ">
+                                                    <span style="padding-left:10px;">@highval</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr style="padding-bottom:5px;margin-top:5px;">
+                                                <td style="width:100px;">
+                                                    Medium:
+                                                </td>
+                                                <td style="width: @mediumwidthpx; margin-left: 10px; background-color: @mediumcol; ">
+                                                    <span style="padding-left:10px;">@mediumval</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr style="padding-bottom: 5px; margin-top: 5px;">
+                                                <td style="width:100px;">
+                                                    Low:
+                                                </td>
+                                                <td style="width: @lowwidthpx; margin-left: 10px; background-color: @lowcol; ">
+                                                    <span style="padding-left:10px;">@lowval</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            <td>
+        </tr>
+    </table>
+    <div>
+        <h2 style="padding-left:30px;">Open User Stories:</h2>
+        <table style="table-layout:fixed;">
+            <tr>
+                <td style="padding-left:50px; margin-bottom:10px;">
+                    Total: @userstoriestotal
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="margin-top:30px;">
+        Regards,
+    </div>
+</div>

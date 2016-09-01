@@ -34,7 +34,7 @@ namespace SharedCalendar
         message.Result = (IntPtr)HTCAPTION;
     }
 
-    public void Init(ICollection<String> calendars, LoginConfiguration config)
+    public void Init(ICollection<String> calendars, Configuration config)
     {
       lbSyncRelease.Text = String.Format(lbSyncRelease.Text, config.ReleaseName);
 

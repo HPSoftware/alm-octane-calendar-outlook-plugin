@@ -37,7 +37,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
             if (obj == null) return result;
-            LoginConfiguration entity = ((LoginConfiguration)obj);
+            Configuration entity = ((Configuration)obj);
             IDictionary<string, object> properties = entity.GetProperties();
 
             //encrypt secret properties

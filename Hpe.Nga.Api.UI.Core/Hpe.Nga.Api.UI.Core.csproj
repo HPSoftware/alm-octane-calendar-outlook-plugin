@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="Configuration\BaseConfiguration.cs" />
     <Compile Include="Configuration\CryptoPropertiesAttribute.cs" />
-    <Compile Include="Configuration\LoginConfiguration.cs" />
+    <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\ConfigurationJsonConverter.cs" />
     <Compile Include="Configuration\ConfigurationPersistService.cs" />
     <Compile Include="Configuration\SettingsForm.cs">

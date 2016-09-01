@@ -26,7 +26,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
 
         public String ConfigurationFilePath { get; set; }
 
-        public void Save(LoginConfiguration configuration)
+        public void Save(Configuration configuration)
         {
             String data = m_jsonSerializer.Serialize(configuration);
             File.WriteAllText(GetFullPath(), data);

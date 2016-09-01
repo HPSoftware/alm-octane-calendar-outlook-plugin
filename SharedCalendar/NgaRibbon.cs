@@ -46,7 +46,7 @@ namespace SharedCalendar
 
     private Office.IRibbonUI ribbon;
     private ConfigurationPersistService persistService = new ConfigurationPersistService();
-    private LoginConfiguration loginConfig;
+    private Configuration config;
     private Boolean isLoggedIn = false;
 
     #endregion
@@ -57,7 +57,7 @@ namespace SharedCalendar
     {
       Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
       persistService.ConfigurationFileName = "SharedCalendar.configuration";
-      loginConfig = persistService.Load<LoginConfiguration>();
+      config = persistService.Load<Configuration>();
     }
 
     public Boolean GetIsLoggedIn(IRibbonControl control)
@@ -90,15 +90,15 @@ namespace SharedCalendar
       {
         // connect
         SettingsForm form = new SettingsForm();
-        var calendarName = loginConfig.CalendarName;
-        form.Configuration = loginConfig;
+        var calendarName = config.CalendarName;
+        form.Configuration = config;
 
         if (form.ShowDialog() == DialogResult.OK)
         {
-          loginConfig = form.Configuration;
-          loginConfig.CalendarName = calendarName;
+          config = form.Configuration;
+          config.CalendarName = calendarName;
 
-          NgaUtils.init(loginConfig.SharedSpaceId, loginConfig.WorkspaceId, loginConfig.ReleaseId);
+          NgaUtils.init(config.SharedSpaceId, config.WorkspaceId, config.ReleaseId);
           isLoggedIn = true;
 
           // select the calendar tab 
@@ -117,20 +117,20 @@ namespace SharedCalendar
       {
         SyncForm form = new SyncForm();
         // get calender list and initialize the form
-        ICollection<String> calendars = OutlookUtils.GetCalendarList(loginConfig.CalendarName);
-        form.Init(calendars, loginConfig);
+        ICollection<String> calendars = OutlookUtils.GetCalendarList(config.CalendarName);
+        form.Init(calendars, config);
 
         if (form.ShowDialog() == DialogResult.OK)
         {
-          loginConfig.CalendarName = form.SelectedCalendar;
-          OutlookUtils.SelectedCalendarName = loginConfig.CalendarName;
+          config.CalendarName = form.SelectedCalendar;
+          OutlookUtils.SelectedCalendarName = config.CalendarName;
           //Get by id
           Release release = NgaUtils.GetSelectedRelease(); //NgaUtils.GetReleaseById(releaseId);
           EntityListResult<Sprint> sprints = NgaUtils.GetSprintsByRelease(release.Id);
-          OutlookSyncUtils.SyncSprintsToOutlook(loginConfig.CalendarName, release, sprints);
+          OutlookSyncUtils.SyncSprintsToOutlook(config.CalendarName, release, sprints);
 
           EntityListResult<Milestone> milestones = NgaUtils.GetMilestonesByRelease(release.Id);
-          OutlookSyncUtils.SyncMilestonesToOutlook(loginConfig.CalendarName, release, milestones);
+          OutlookSyncUtils.SyncMilestonesToOutlook(config.CalendarName, release, milestones);
           String str = String.Format("Sync completed successfully.{0}Summary : {1} sprints and {2} milestones.",
               Environment.NewLine, sprints.data.Count, milestones.data.Count);
           MessageBox.Show(str, "Sync completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -224,7 +224,7 @@ namespace SharedCalendar
     private void OnApplicationExit(object sender, EventArgs e)
     {
       //save last successful configuration
-      persistService.Save(loginConfig);
+      persistService.Save(config);
     }
 
     #endregion

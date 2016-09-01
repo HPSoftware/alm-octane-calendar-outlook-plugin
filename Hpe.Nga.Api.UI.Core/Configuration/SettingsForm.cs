@@ -40,7 +40,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
         message.Result = (IntPtr)HTCAPTION;
     }
 
-    public LoginConfiguration Configuration
+    public Configuration Configuration
     {
       get
       {
@@ -48,7 +48,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
         Workspace selectedWorkspace = (Workspace)cmbWorkspace.SelectedItem;
         Release selectedRelease = (Release)cmbRelease.SelectedItem;
 
-        LoginConfiguration conf = new LoginConfiguration(txtServer.Text, txtName.Text, txtPassword.Text);
+        Configuration conf = new Configuration(txtServer.Text, txtName.Text, txtPassword.Text);
         if (selectedSS != null)
         {
           conf.SharedSpaceId = selectedSS.Id;

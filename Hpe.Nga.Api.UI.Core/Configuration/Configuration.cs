@@ -7,7 +7,7 @@ using Hpe.Nga.Api.Core.Services.Core;
 namespace Hpe.Nga.Api.UI.Core.Configuration
 {
     [CryptoProperties("password")]
-    public class LoginConfiguration : BaseConfiguration
+    public class Configuration : BaseConfiguration
     {
         public static string SERVER_URL_FIELD = "serverUrl";
         public static string NAME_FIELD = "name";
@@ -27,18 +27,18 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
 
         #region Ctors
 
-        public LoginConfiguration()
+        public Configuration()
             : base()
         {
         }
 
-        public LoginConfiguration(IDictionary<string, object> properties)
+        public Configuration(IDictionary<string, object> properties)
             : base(properties)
         {
         }
 
 
-        public LoginConfiguration(String serverUrl, String name, String password)
+        public Configuration(String serverUrl, String name, String password)
         {
             ServerUrl = serverUrl;
             Name = name;

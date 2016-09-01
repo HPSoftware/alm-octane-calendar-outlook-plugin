@@ -18,8 +18,6 @@ namespace SharedCalendar
     public static string APPOINTMENT_MILESTONE_ID_FIELD = "MilestoneId";
     public static IDictionary<String, MAPIFolder> m_calendars;
 
-    public static String SelectedCalendarName;
-
     public static Application GetApplication()
     {
       Application outlookApp = new Microsoft.Office.Interop.Outlook.Application();
@@ -62,9 +60,9 @@ namespace SharedCalendar
       }
     }
 
-    public static AppointmentItem AddAppointment(String subject, DateTime startDate, DateTime endDate, String categories, int reminderMinutesBeforeStart, Boolean reminderSet, Dictionary<String, Object> customFields, bool save)
+    public static AppointmentItem AddAppointment(String calendarName, String subject, DateTime startDate, DateTime endDate, String categories, int reminderMinutesBeforeStart, Boolean reminderSet, Dictionary<String, Object> customFields, bool save)
     {
-      var calendar = GetSyncCalendarFolder();
+      var calendar = GetSyncCalendarFolder(calendarName);
       AppointmentItem newAppointment = (AppointmentItem)calendar.Items.Add(OlItemType.olAppointmentItem);
       newAppointment.AllDayEvent = true;
       newAppointment.Start = startDate;
@@ -142,9 +140,9 @@ namespace SharedCalendar
       return m_calendars.Keys;
     }
 
-    private static MAPIFolder GetSyncCalendarFolder()
+    private static MAPIFolder GetSyncCalendarFolder(String calendarName)
     {
-      return m_calendars[SelectedCalendarName];
+      return m_calendars[calendarName];
     }
   }
 }

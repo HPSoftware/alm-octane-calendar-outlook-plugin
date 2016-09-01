@@ -122,11 +122,9 @@ namespace SharedCalendar
         // get calender list and initialize the form
         ICollection<String> calendars = OutlookUtils.GetCalendarList(config.CalendarName);
         form.Init(calendars, config);
-
         if (form.ShowDialog() == DialogResult.OK)
         {
           config.CalendarName = form.SelectedCalendar;
-          OutlookUtils.SelectedCalendarName = config.CalendarName;
           //Get by id
           Release release = NgaUtils.GetSelectedRelease(); //NgaUtils.GetReleaseById(releaseId);
           EntityListResult<Sprint> sprints = NgaUtils.GetSprintsByRelease(release.Id);

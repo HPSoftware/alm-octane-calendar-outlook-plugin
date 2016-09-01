@@ -66,7 +66,7 @@ namespace SharedCalendar
         customFields.Add(OutlookUtils.APPOINTMENT_RELEASE_ID_FIELD, sprint.Release.Id);
         customFields[OutlookUtils.APPOINTMENT_SPRINT_ID_FIELD] = sprint.Id;
         String sprintName = getSprintAppointmentName(sprint);
-        OutlookUtils.AddAppointment(sprintName, sprint.StartDate, sprint.EndDate, "", 0, false, customFields, true);
+        OutlookUtils.AddAppointment(calendarName, sprintName, sprint.StartDate, sprint.EndDate, "", 0, false, customFields, true);
       }
 
     }
@@ -178,7 +178,7 @@ namespace SharedCalendar
             String milestoneName = getMilestoneAppointmentName(milestone);
             MilestoneDataContainer msExtraData = getMilestoneData(milestone);
 
-            OutlookUtils.AddAppointment(milestoneName, milestone.GetStartDate(), milestone.GetEndDate(), msExtraData.Category, msExtraData.ReminderMinutesBeforeStart, msExtraData.ReminderSet, customFields, true);
+            OutlookUtils.AddAppointment(calendarName, milestoneName, milestone.GetStartDate(), milestone.GetEndDate(), msExtraData.Category, msExtraData.ReminderMinutesBeforeStart, msExtraData.ReminderSet, customFields, true);
         }
     }
 

@@ -17,6 +17,7 @@ using Microsoft.Office.Tools.Ribbon;
 using SharedCalendar.Properties;
 using Hpe.Nga.Api.Core.Services.GroupBy;
 using Office = Microsoft.Office.Core;
+using Hpe.Nga.Api.Core.Connector.Exceptions;
 
 // TODO:  Follow these steps to enable the Ribbon (XML) item:
 
@@ -55,6 +56,8 @@ namespace SharedCalendar
 
     public NgaRibbon()
     {
+      AppDomain currentDomain = AppDomain.CurrentDomain;
+      currentDomain.UnhandledException += new UnhandledExceptionEventHandler(unhandledExceptionHandler);
       Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
       persistService.ConfigurationFileName = "SharedCalendar.configuration";
       config = persistService.Load<Configuration>();
@@ -135,6 +138,10 @@ namespace SharedCalendar
               Environment.NewLine, sprints.data.Count, milestones.data.Count);
           MessageBox.Show(str, "Sync completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+      }
+      catch (ServerUnavailableException ex)
+      {
+        MessageBox.Show("Server is not available", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
       catch (Exception e)
       {
@@ -225,6 +232,12 @@ namespace SharedCalendar
     {
       //save last successful configuration
       persistService.Save(config);
+    }
+
+    static void unhandledExceptionHandler(object sender, UnhandledExceptionEventArgs args)
+    {
+      Exception e = (Exception)args.ExceptionObject;
+      MessageBox.Show("Error: " + e.Message + Environment.NewLine + e.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     #endregion

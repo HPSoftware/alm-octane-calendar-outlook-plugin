@@ -212,13 +212,12 @@ namespace SharedCalendar
           modified = true;
         }
 
-        if (!String.IsNullOrEmpty(notificationData.Category) && 
-          (appointment.Categories == null || !appointment.Categories.Contains(notificationData.Category)))
+        if (String.Compare(appointment.Categories, notificationData.Category) != 0)
         {
-          appointment.Categories = appointment.Categories + notificationData.Category;
+          appointment.Categories = notificationData.Category;
           modified = true;
         }
-
+        
         if (modified)
         {
             appointment.Save();

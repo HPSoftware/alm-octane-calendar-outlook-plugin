@@ -7,7 +7,7 @@ namespace SharedCalendar
 {
   public class MilestoneDataContainer
   {
-    private static String[] PARAMS_LIST = new string[] { "Color", "Reminder" };
+    private static String[] PARAMS_LIST = new string[] { "Category", "Reminder" };
     
     public String Category;
     public int ReminderMinutesBeforeStart;

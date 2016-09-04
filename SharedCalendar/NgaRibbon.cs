@@ -93,9 +93,12 @@ namespace SharedCalendar
       {
         // connect
         SettingsForm form = new SettingsForm();
-        var calendarName = config.CalendarName;
+        String calendarName = null;
+        if (config != null)
+        {
+          calendarName = config.CalendarName;
+        }
         form.Configuration = config;
-
         if (form.ShowDialog() == DialogResult.OK)
         {
           config = form.Configuration;

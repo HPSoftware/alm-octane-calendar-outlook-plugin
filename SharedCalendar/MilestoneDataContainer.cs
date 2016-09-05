@@ -18,7 +18,7 @@ namespace SharedCalendar
       string[] parts = phrase.Split(':');
       if (parts.Length == 2) {
         var param = parts[0].Trim();
-        var value = parts[1].Trim();
+        var value = parts[1].Trim().Replace("</p>", "");
         
         for (int i = 0; i < PARAMS_LIST.Length ; i++) {
           if (String.Compare(param, PARAMS_LIST[i], StringComparison.OrdinalIgnoreCase) == 0) {

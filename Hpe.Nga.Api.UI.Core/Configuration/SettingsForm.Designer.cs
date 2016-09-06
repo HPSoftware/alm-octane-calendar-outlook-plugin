@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       System.Windows.Forms.Label label4;
       System.Windows.Forms.Label label7;
       System.Windows.Forms.Label label8;
@@ -52,6 +53,7 @@
       this.btnLogin = new System.Windows.Forms.Button();
       this.lblStatus = new System.Windows.Forms.Label();
       this.closeImg = new System.Windows.Forms.PictureBox();
+      this.urlTooltip = new System.Windows.Forms.ToolTip(this.components);
       label4 = new System.Windows.Forms.Label();
       label7 = new System.Windows.Forms.Label();
       label8 = new System.Windows.Forms.Label();
@@ -315,9 +317,9 @@
       this.label1.Location = new System.Drawing.Point(15, 89);
       this.label1.Name = "label1";
       this.label1.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
-      this.label1.Size = new System.Drawing.Size(55, 25);
+      this.label1.Size = new System.Drawing.Size(31, 25);
       this.label1.TabIndex = 17;
-      this.label1.Text = "Server:";
+      this.label1.Text = "Url:";
       // 
       // txtServer
       // 
@@ -329,6 +331,7 @@
       this.txtServer.Name = "txtServer";
       this.txtServer.Size = new System.Drawing.Size(368, 24);
       this.txtServer.TabIndex = 10;
+      this.urlTooltip.SetToolTip(this.txtServer, "Use format: <protocol>://<server name>");
       this.txtServer.TextChanged += new System.EventHandler(this.OnLoginSettingsChanged);
       // 
       // btnLogin
@@ -341,7 +344,7 @@
       this.btnLogin.Location = new System.Drawing.Point(120, 526);
       this.btnLogin.Name = "btnLogin";
       this.btnLogin.Size = new System.Drawing.Size(259, 40);
-      this.btnLogin.TabIndex = 21;
+      this.btnLogin.TabIndex = 25;
       this.btnLogin.Text = "Connect";
       this.btnLogin.UseVisualStyleBackColor = false;
       this.btnLogin.Click += new System.EventHandler(this.btnConnect_Click);
@@ -435,5 +438,6 @@
         private System.Windows.Forms.Button btnAuthenticate;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.PictureBox closeImg;
+        private System.Windows.Forms.ToolTip urlTooltip;
     }
 }

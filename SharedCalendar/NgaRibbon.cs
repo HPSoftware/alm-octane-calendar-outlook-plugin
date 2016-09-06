@@ -121,6 +121,7 @@ namespace SharedCalendar
     {
       try
       {
+        OutlookUtils.SelectCalenderModule();
         SyncForm form = new SyncForm();
         // get calender list and initialize the form
         ICollection<String> calendars = OutlookUtils.GetCalendarList(config.CalendarName);

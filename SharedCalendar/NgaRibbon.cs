@@ -143,7 +143,7 @@ namespace SharedCalendar
       }
       catch (ServerUnavailableException ex)
       {
-        MessageBox.Show("Server is not available", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        ShowServerIsNotAvailableMsg();
       }
       catch (Exception e)
       {
@@ -161,6 +161,10 @@ namespace SharedCalendar
         GroupResult groupResult = NgaUtils.GetAllDefectWithGroupBy(release.Id);
         GroupResult usGroupResult = NgaUtils.GetAllStoriesWithGroupBy(release.Id);
         OutlookSyncUtils.getReleaseMailReport(release, groupResult, usGroupResult);
+      }
+      catch (ServerUnavailableException ex)
+      {
+        ShowServerIsNotAvailableMsg();
       }
       catch (Exception e)
       {
@@ -228,6 +232,11 @@ namespace SharedCalendar
         }
       }
       return null;
+    }
+    
+    private void ShowServerIsNotAvailableMsg()
+    {
+      MessageBox.Show("Server is not available", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     private void OnApplicationExit(object sender, EventArgs e)

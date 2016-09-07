@@ -75,7 +75,7 @@
       lbCalendar.Name = "lbCalendar";
       lbCalendar.Size = new System.Drawing.Size(148, 18);
       lbCalendar.TabIndex = 1;
-      lbCalendar.Text = "to Outllook Calendar:";
+      lbCalendar.Text = "to Outlook Calendar:";
       // 
       // btnSync
       // 

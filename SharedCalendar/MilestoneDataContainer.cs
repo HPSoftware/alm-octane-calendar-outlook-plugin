@@ -57,6 +57,11 @@ namespace SharedCalendar
         else if (String.Compare(parts[1], "hour", StringComparison.OrdinalIgnoreCase) == 0 || String.Compare(parts[1], "hours", StringComparison.OrdinalIgnoreCase) == 0) {
           time = time * 60;
         }
+
+        else if (String.Compare(parts[1], "week", StringComparison.OrdinalIgnoreCase) == 0 || String.Compare(parts[1], "weeks", StringComparison.OrdinalIgnoreCase) == 0)
+        {
+          time = time * (7 * 24 * 60);
+        }
       }
       return time;
     }

@@ -89,6 +89,7 @@ namespace SharedCalendar
             return result;
         }
 
+        // return all not done defects
         public static GroupResult GetAllDefectWithGroupBy(long releaseId)
         {
             List<String> fields = new List<string>();
@@ -112,6 +113,7 @@ namespace SharedCalendar
             return result;
         }
 
+        // return all not done user user stories
         public static GroupResult GetAllStoriesWithGroupBy(long releaseId)
         {
             List<String> fields = new List<string>();

@@ -1,4 +1,14 @@
-﻿using System;
+﻿// (c) Copyright 2016 Hewlett Packard Enterprise Development LP
+
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+
+// You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -18,25 +28,6 @@ using SharedCalendar.Properties;
 using Hpe.Nga.Api.Core.Services.GroupBy;
 using Office = Microsoft.Office.Core;
 using Hpe.Nga.Api.Core.Connector.Exceptions;
-
-// TODO:  Follow these steps to enable the Ribbon (XML) item:
-
-// 1: Copy the following code block into the ThisAddin, ThisWorkbook, or ThisDocument class.
-
-//  protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
-//  {
-//      return new NgaRibbon();
-//  }
-
-// 2. Create callback methods in the "Ribbon Callbacks" region of this class to handle user
-//    actions, such as clicking a button. Note: if you have exported this Ribbon from the Ribbon designer,
-//    move your code from the event handlers to the callback methods and modify the code to work with the
-//    Ribbon extensibility (RibbonX) programming model.
-
-// 3. Assign attributes to the control tags in the Ribbon XML file to identify the appropriate callback methods in your code.  
-
-// For more information, see the Ribbon XML documentation in the Visual Studio Tools for Office Help.
-
 
 namespace SharedCalendar
 {

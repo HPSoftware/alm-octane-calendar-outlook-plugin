@@ -34,7 +34,7 @@
     <PublishUrl>C:\dev\SharedCalendar\publish\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.12</ApplicationVersion>
+    <ApplicationVersion>1.0.0.14</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -240,12 +240,8 @@
   <ItemGroup>
     <None Include="assets\close.png" />
     <None Include="assets\connect.png" />
-    <None Include="assets\connected.png" />
-    <None Include="assets\disconnected.png" />
     <None Include="assets\release-report.png" />
-    <None Include="assets\release-report-off.png" />
     <None Include="assets\sync.png" />
-    <None Include="assets\sync-off.png" />
     <None Include="assets\disconnect.png" />
     <Content Include="ReportTemplate.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

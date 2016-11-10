@@ -76,7 +76,7 @@ namespace SharedCalendar
       if (isLoggedIn)
       {
         // disconnect
-        RestConnector.GetInstance().Disconnect();
+        SettingsForm.RestConnector.Disconnect();
 
         isLoggedIn = false;
       }

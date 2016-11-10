@@ -30,7 +30,11 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
     private const int WM_NCHITTEST = 0x84;
     private const int HTCLIENT = 0x1;
     private const int HTCAPTION = 0x2;
+
     private bool loadingConfiguration = false;
+
+    public static RestConnector RestConnector = new RestConnector();
+    public static EntityService EntityService = new EntityService(RestConnector);
 
     public SettingsForm()
     {
@@ -176,7 +180,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
       {
         lblStatus.Text = "Authenticating ...";
         lblStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-        bool connected = RestConnector.GetInstance().Connect(txtServer.Text, txtName.Text, txtPassword.Text);
+        bool connected = RestConnector.Connect(txtServer.Text, txtName.Text, txtPassword.Text);
         btnAuthenticate.Enabled = true;
         Application.DoEvents();
         LoadSharedSpaces();
@@ -195,7 +199,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
       EntityListResult<SharedSpace> sharedSpaces = null;
       try
       {
-        sharedSpaces = EntityService.GetInstance().Get<SharedSpace>(new SiteContext());
+        sharedSpaces = EntityService.Get<SharedSpace>(new SiteContext());
       }
       catch (Exception)
       {
@@ -255,7 +259,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
       List<QueryPhrase> queries = new List<QueryPhrase>();
       queries.Add(byName);
 
-      EntityListResult<WorkspaceUser> users = EntityService.GetInstance().Get<WorkspaceUser>(defaultWorkspaceContext, queries, null);
+      EntityListResult<WorkspaceUser> users = EntityService.Get<WorkspaceUser>(defaultWorkspaceContext, queries, null);
       long userId = users.data[0].Id;
 
 
@@ -266,7 +270,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
       CrossQueryPhrase byUser = new CrossQueryPhrase(Workspace.USERS_FIELD, byUserId);
       queries = new List<QueryPhrase>();
       queries.Add(byUser);
-      EntityListResult<Workspace> workspaces = EntityService.GetInstance().Get<Workspace>(context, queries, null);
+      EntityListResult<Workspace> workspaces = EntityService.Get<Workspace>(context, queries, null);
 
       //User user = GetSharedSpaceUser(sharedSpaceId, txtName.Text);
 
@@ -277,7 +281,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
     private void LoadReleases(long sharedSpaceId, long workspaceId)
     {
       WorkspaceContext context = new WorkspaceContext(sharedSpaceId, workspaceId);
-      EntityListResult<Release> result = EntityService.GetInstance().Get<Release>(context);
+      EntityListResult<Release> result = EntityService.Get<Release>(context);
 
       if (result != null)
       {

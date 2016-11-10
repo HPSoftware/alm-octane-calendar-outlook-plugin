@@ -19,12 +19,12 @@ using Hpe.Nga.Api.Core.Services;
 using Hpe.Nga.Api.Core.Services.Query;
 using Hpe.Nga.Api.Core.Services.RequestContext;
 using Hpe.Nga.Api.Core.Services.GroupBy;
+using Hpe.Nga.Api.UI.Core.Configuration;
 
 namespace SharedCalendar
 {
     public static class NgaUtils
     {
-        private static EntityService entityService = EntityService.GetInstance();
         private static WorkspaceContext workspaceContext;
         private static long selectedReleaseId = 0;
 
@@ -55,7 +55,7 @@ namespace SharedCalendar
             fields.Add(Release.START_DATE_FIELD);
             fields.Add(Release.END_DATE_FIELD);
             fields.Add(Release.NUM_OF_SPRINTS_FIELD);
-            Release release = entityService.GetById<Release>(workspaceContext, id, fields);
+            Release release = SettingsForm.EntityService.GetById<Release>(workspaceContext, id, fields);
 
             Debug.Assert(release.Id == id);
             return release;
@@ -75,7 +75,7 @@ namespace SharedCalendar
 
             queryPhrases.Add(byReleasePhrase);
 
-            EntityListResult<Sprint> result = entityService.Get<Sprint>(workspaceContext, queryPhrases, fields);
+            EntityListResult<Sprint> result = SettingsForm.EntityService.Get<Sprint>(workspaceContext, queryPhrases, fields);
             Release release = result.data[0].Release;
             Debug.Assert(release.Id == releaseId);
             return result;
@@ -95,7 +95,7 @@ namespace SharedCalendar
 
             queryPhrases.Add(byReleasePhrase);
 
-            EntityListResult<Milestone> result = entityService.Get<Milestone>(workspaceContext, queryPhrases, fields);
+            EntityListResult<Milestone> result = SettingsForm.EntityService.Get<Milestone>(workspaceContext, queryPhrases, fields);
             return result;
         }
 
@@ -119,7 +119,7 @@ namespace SharedCalendar
             CrossQueryPhrase byPhasePhrase = new CrossQueryPhrase(WorkItem.PHASE_FIELD, phaseIdPhrase);
             queries.Add(byPhasePhrase);
 
-            GroupResult result = entityService.GetWithGroupBy<WorkItem>(workspaceContext, queries, "severity");
+            GroupResult result = SettingsForm.EntityService.GetWithGroupBy<WorkItem>(workspaceContext, queries, "severity");
             return result;
         }
 
@@ -143,7 +143,7 @@ namespace SharedCalendar
             CrossQueryPhrase byPhasePhrase = new CrossQueryPhrase(WorkItem.PHASE_FIELD, phaseIdPhrase);
             queries.Add(byPhasePhrase);
 
-            GroupResult result = entityService.GetWithGroupBy<WorkItem>(workspaceContext, queries, WorkItem.PHASE_FIELD);
+            GroupResult result = SettingsForm.EntityService.GetWithGroupBy<WorkItem>(workspaceContext, queries, WorkItem.PHASE_FIELD);
             return result;
         }
 
@@ -167,7 +167,7 @@ namespace SharedCalendar
             queryPhrases.Add(byPhasePhrase);
 
 
-            EntityListResult<WorkItem> result = entityService.Get<WorkItem>(workspaceContext, queryPhrases, fields, 1);
+            EntityListResult<WorkItem> result = SettingsForm.EntityService.Get<WorkItem>(workspaceContext, queryPhrases, fields, 1);
             return result;
         }
 

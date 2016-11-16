@@ -174,7 +174,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
       EnableLoginButton(false);
     }
 
-    private void OnLoginClick(object sender, EventArgs e)
+    private void OnLoginClick(object sender, EventArgs args)
     {
       try
       {
@@ -183,12 +183,17 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
         bool connected = RestConnector.Connect(txtServer.Text, txtName.Text, txtPassword.Text);
         btnAuthenticate.Enabled = true;
         Application.DoEvents();
-        LoadSharedSpaces();
         lblStatus.Text = "";
+        LoadSharedSpaces();
       }
-      catch (Exception)
+      catch (Exception e)
       {
-        lblStatus.Text = "Failed to authenticate";
+        String exMessage = "";
+        if (e.Message.Contains("401"))
+        {
+          exMessage = " User Unauthorized";
+        }
+        lblStatus.Text = "Failed to authenticate." + exMessage;
         lblStatus.ForeColor = Color.Red;
       }
 
@@ -217,7 +222,6 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
         sharedSpaces.total_count = 1;
       }
       FillCombo(cmbSharedSpace, sharedSpaces.data);
-      //LoadWorkspaces(((SharedSpace)cmbSharedSpace.SelectedItem).Id);
     }
 
     private void FillCombo<T>(ComboBox combo, List<T> data) where T : BaseEntity
@@ -248,34 +252,41 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
       {
         combo.SelectedItem = data[0];
       }
-
+      
       combo.Enabled = true;
     }
 
     private void LoadWorkspaces(long sharedSpaceId)
     {
-      WorkspaceContext defaultWorkspaceContext = new WorkspaceContext(sharedSpaceId, 1002);
-      LogicalQueryPhrase byName = new LogicalQueryPhrase(WorkspaceUser.NAME_FIELD, txtName.Text);
-      List<QueryPhrase> queries = new List<QueryPhrase>();
-      queries.Add(byName);
+      try
+      {
+        WorkspaceContext defaultWorkspaceContext = new WorkspaceContext(sharedSpaceId, 1002);
+        LogicalQueryPhrase byName = new LogicalQueryPhrase(WorkspaceUser.NAME_FIELD, txtName.Text);
+        List<QueryPhrase> queries = new List<QueryPhrase>();
+        queries.Add(byName);
 
-      EntityListResult<WorkspaceUser> users = EntityService.Get<WorkspaceUser>(defaultWorkspaceContext, queries, null);
-      long userId = users.data[0].Id;
+        EntityListResult<WorkspaceUser> users = EntityService.Get<WorkspaceUser>(defaultWorkspaceContext, queries, null);
+        long userId = users.data[0].Id;
 
 
-      SharedSpaceContext context = new SharedSpaceContext(sharedSpaceId);
+        SharedSpaceContext context = new SharedSpaceContext(sharedSpaceId);
 
 
-      LogicalQueryPhrase byUserId = new LogicalQueryPhrase(WorkspaceUser.ID_FIELD, userId);
-      CrossQueryPhrase byUser = new CrossQueryPhrase(Workspace.USERS_FIELD, byUserId);
-      queries = new List<QueryPhrase>();
-      queries.Add(byUser);
-      EntityListResult<Workspace> workspaces = EntityService.Get<Workspace>(context, queries, null);
+        LogicalQueryPhrase byUserId = new LogicalQueryPhrase(WorkspaceUser.ID_FIELD, userId);
+        CrossQueryPhrase byUser = new CrossQueryPhrase(Workspace.USERS_FIELD, byUserId);
+        queries = new List<QueryPhrase>();
+        queries.Add(byUser);
+        EntityListResult<Workspace> workspaces = EntityService.Get<Workspace>(context, queries, null);
 
-      //User user = GetSharedSpaceUser(sharedSpaceId, txtName.Text);
+        //User user = GetSharedSpaceUser(sharedSpaceId, txtName.Text);
 
-      FillCombo<Workspace>(cmbWorkspace, workspaces.data);
-
+        FillCombo<Workspace>(cmbWorkspace, workspaces.data);
+      }
+      catch (Exception ex)
+      {
+        lblStatus.Text = "Failed to load workspaces";
+        lblStatus.ForeColor = Color.Red;
+      }
     }
 
     private void LoadReleases(long sharedSpaceId, long workspaceId)

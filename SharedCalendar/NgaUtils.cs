@@ -113,9 +113,9 @@ namespace SharedCalendar
             QueryPhrase releaseIdPhrase = new LogicalQueryPhrase("id", releaseId);
             QueryPhrase byReleasePhrase = new CrossQueryPhrase(WorkItem.RELEASE_FIELD, releaseIdPhrase);
             queries.Add(byReleasePhrase);
-            LogicalQueryPhrase phaseNamePhrase = new LogicalQueryPhrase("name", "Done");
-            phaseNamePhrase.NegativeCondition = true;
-            CrossQueryPhrase phaseIdPhrase = new CrossQueryPhrase("metaphase", phaseNamePhrase);
+            LogicalQueryPhrase doneMetaphasePhrase = new LogicalQueryPhrase("logical_name", "metaphase.work_item.done");
+            NegativeQueryPhrase notDoneMetaphasePhrase = new NegativeQueryPhrase(doneMetaphasePhrase);
+            CrossQueryPhrase phaseIdPhrase = new CrossQueryPhrase("metaphase", notDoneMetaphasePhrase);
             CrossQueryPhrase byPhasePhrase = new CrossQueryPhrase(WorkItem.PHASE_FIELD, phaseIdPhrase);
             queries.Add(byPhasePhrase);
 
@@ -137,37 +137,13 @@ namespace SharedCalendar
             QueryPhrase releaseIdPhrase = new LogicalQueryPhrase("id", releaseId);
             QueryPhrase byReleasePhrase = new CrossQueryPhrase(WorkItem.RELEASE_FIELD, releaseIdPhrase);
             queries.Add(byReleasePhrase);
-            LogicalQueryPhrase phaseNamePhrase = new LogicalQueryPhrase("name", "Done");
-            phaseNamePhrase.NegativeCondition = true;
-            CrossQueryPhrase phaseIdPhrase = new CrossQueryPhrase("metaphase", phaseNamePhrase);
+            LogicalQueryPhrase doneMetaphasePhrase = new LogicalQueryPhrase("logical_name", "metaphase.work_item.done");
+            NegativeQueryPhrase notDoneMetaphasePhrase = new NegativeQueryPhrase(doneMetaphasePhrase);
+            CrossQueryPhrase phaseIdPhrase = new CrossQueryPhrase("metaphase", notDoneMetaphasePhrase);
             CrossQueryPhrase byPhasePhrase = new CrossQueryPhrase(WorkItem.PHASE_FIELD, phaseIdPhrase);
             queries.Add(byPhasePhrase);
 
             GroupResult result = SettingsForm.EntityService.GetWithGroupBy<WorkItem>(workspaceContext, queries, WorkItem.PHASE_FIELD);
-            return result;
-        }
-
-        public static EntityListResult<WorkItem> GetStoriesByRelease(long releaseId)
-        {
-            List<String> fields = new List<string>();
-            fields.Add(WorkItem.NAME_FIELD);
-            fields.Add(WorkItem.SUBTYPE_FIELD);
-
-            List<QueryPhrase> queryPhrases = new List<QueryPhrase>();
-            List<QueryPhrase> queries = new List<QueryPhrase>();
-            LogicalQueryPhrase subtypeQuery = new LogicalQueryPhrase(WorkItem.SUBTYPE_FIELD, WorkItem.SUBTYPE_STORY);
-            queryPhrases.Add(subtypeQuery);
-            QueryPhrase releaseIdPhrase = new LogicalQueryPhrase("id", releaseId);
-            QueryPhrase byReleasePhrase = new CrossQueryPhrase(WorkItem.RELEASE_FIELD, releaseIdPhrase);
-            queryPhrases.Add(byReleasePhrase);
-            LogicalQueryPhrase phaseNamePhrase = new LogicalQueryPhrase("name", "Done");
-            phaseNamePhrase.NegativeCondition = true;
-            CrossQueryPhrase phaseIdPhrase = new CrossQueryPhrase("metaphase", phaseNamePhrase);
-            CrossQueryPhrase byPhasePhrase = new CrossQueryPhrase(WorkItem.PHASE_FIELD, phaseIdPhrase);
-            queryPhrases.Add(byPhasePhrase);
-
-
-            EntityListResult<WorkItem> result = SettingsForm.EntityService.Get<WorkItem>(workspaceContext, queryPhrases, fields, 1);
             return result;
         }
 

@@ -276,9 +276,18 @@ namespace SharedCalendar
           map.Add("list_node.severity.high", 0);
           map.Add("list_node.severity.medium", 0);
           map.Add("list_node.severity.low", 0);
+          map.Add("list_node.severity.empty", 0);
           foreach (Group group in groupResult.groups)
           {
-              map[group.value.logical_name] = group.count;
+              if (group.value == null)
+              {
+                  map["list_node.severity.empty"] = group.count;
+              }
+              else
+              {
+                  map[group.value.logical_name] = group.count;
+              }
+              
               maxVal = (maxVal < group.count ? group.count : maxVal);
               totatDefects += group.count;
           }
@@ -307,6 +316,11 @@ namespace SharedCalendar
           htmlBody = htmlBody.Replace("@lowwidth", lowVal.ToString());
           htmlBody = htmlBody.Replace("@lowcol", ((lowVal == 0) ? "none" : "#E3CB44"));
           htmlBody = htmlBody.Replace("@lowval", (map["list_node.severity.low"]).ToString());
+
+          int emptyVal = ((int)(map["list_node.severity.empty"] * maxWidth / maxVal));
+          htmlBody = htmlBody.Replace("@emptywidth", emptyVal.ToString());
+          htmlBody = htmlBody.Replace("@emptycol", ((emptyVal == 0) ? "none" : "#ffff00"));
+          htmlBody = htmlBody.Replace("@emptyval", (map["list_node.severity.empty"]).ToString());
 
           StringBuilder storiesStrBuilder = new StringBuilder(" (");
           int totalStories = 0;

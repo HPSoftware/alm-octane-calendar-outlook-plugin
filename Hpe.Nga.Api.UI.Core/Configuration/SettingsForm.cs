@@ -33,8 +33,24 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
 
     private bool loadingConfiguration = false;
 
-    public static RestConnector RestConnector = new RestConnector();
-    public static EntityService EntityService = new EntityService(RestConnector);
+    private static RestConnector restConnector = new RestConnector();
+    private static EntityService entityService = new EntityService(restConnector);
+
+    public static EntityService EntityService
+    {
+        get
+        {
+            return entityService;
+        }
+    }
+
+    public static RestConnector RestConnector
+    {
+        get
+        {
+            return restConnector;
+        }
+    }
 
     public SettingsForm()
     {
@@ -180,7 +196,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
       {
         lblStatus.Text = "Authenticating ...";
         lblStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-        bool connected = RestConnector.Connect(txtServer.Text, txtName.Text, txtPassword.Text);
+        bool connected = restConnector.Connect(txtServer.Text, txtName.Text, txtPassword.Text);
         btnAuthenticate.Enabled = true;
         Application.DoEvents();
         lblStatus.Text = "";
@@ -191,9 +207,16 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
         String exMessage = "";
         if (e.Message.Contains("401"))
         {
-          exMessage = " User Unauthorized";
+            exMessage = "Failed to authenticate. Validate your username and password.";
+        } 
+        else if (e.Message.Contains("404")) {
+            exMessage = "Connection URL is invalid. Expected url format: http://<domain>:<port>";
         }
-        lblStatus.Text = "Failed to authenticate." + exMessage;
+        else
+        {
+            exMessage = "Failed to authenticate : " + e.Message;
+        }
+        lblStatus.Text = exMessage;
         lblStatus.ForeColor = Color.Red;
       }
 

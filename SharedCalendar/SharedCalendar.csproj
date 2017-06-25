@@ -34,7 +34,7 @@
     <PublishUrl>C:\dev\SharedCalendar\publish\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>12.56.16.1</ApplicationVersion>
+    <ApplicationVersion>12.55.3.0</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -134,9 +134,9 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="Hpe.Nga.Api.Core, Version=12.56.16.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\3rdParty\Hpe.Nga.Api.Core.dll</HintPath>
+    <Reference Include="Hpe.Nga.Api.Core, Version=12.55.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hpe.Nga.Api.Core.12.55.3\lib\net45\Hpe.Nga.Api.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -195,6 +195,7 @@
     <EmbeddedResource Include="SyncForm.resx">
       <DependentUpon>SyncForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

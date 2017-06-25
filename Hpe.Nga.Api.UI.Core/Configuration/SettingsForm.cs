@@ -196,7 +196,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
       {
         lblStatus.Text = "Authenticating ...";
         lblStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-        bool connected = restConnector.Connect(txtServer.Text, txtName.Text, txtPassword.Text);
+        bool connected = restConnector.Connect(txtServer.Text, new UserPassConnectionInfo(txtName.Text, txtPassword.Text));
         btnAuthenticate.Enabled = true;
         Application.DoEvents();
         lblStatus.Text = "";

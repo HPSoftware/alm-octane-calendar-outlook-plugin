@@ -26,21 +26,17 @@ namespace SharedCalendar
     public static class NgaUtils
     {
         private static WorkspaceContext workspaceContext;
-        private static long selectedReleaseId = 0;
+        private static string selectedReleaseId = "0";
 
-        public static void init(long sharedSpaceId, long workspaceId, long releaseId)
+        public static void init(string sharedSpaceId, string workspaceId, string releaseId)
         {
             workspaceContext = GetWorkspaceContext(sharedSpaceId, workspaceId);
             selectedReleaseId = releaseId;
         }
 
-        private static WorkspaceContext GetWorkspaceContext(long sharedSpaceId, long workspaceId)
+        private static WorkspaceContext GetWorkspaceContext(string sharedSpaceId, string workspaceId)
         {
-            SharedSpaceContext sharedSpaceContext = new SharedSpaceContext(sharedSpaceId);
-            //EntityListResult<Workspace> workspaces = entityService.Get<Workspace>(sharedSpaceContext);
-            //Workspace workspace = workspaces.data[0];
-            //long workspaceId = 2029;//workspaces.data[0].Id hardcoded workaround
-            return new WorkspaceContext(sharedSpaceId, workspaceId);
+            return WorkspaceContext.Create(sharedSpaceId, workspaceId);
         }
 
         public static Release GetSelectedRelease()
@@ -48,7 +44,7 @@ namespace SharedCalendar
             return GetReleaseById(selectedReleaseId);
         }
 
-        public static Release GetReleaseById(long id)
+        public static Release GetReleaseById(string id)
         {
             List<String> fields = new List<string>();
             fields.Add(Release.NAME_FIELD);
@@ -61,7 +57,7 @@ namespace SharedCalendar
             return release;
         }
 
-        public static EntityListResult<Sprint> GetSprintsByRelease(long releaseId)
+        public static EntityListResult<Sprint> GetSprintsByRelease(string releaseId)
         {
             List<String> fields = new List<string>();
             fields.Add(Sprint.NAME_FIELD);
@@ -77,11 +73,10 @@ namespace SharedCalendar
 
             EntityListResult<Sprint> result = SettingsForm.EntityService.Get<Sprint>(workspaceContext, queryPhrases, fields);
             Release release = result.data[0].Release;
-            Debug.Assert(release.Id == releaseId);
             return result;
         }
 
-        public static EntityListResult<Milestone> GetMilestonesByRelease(long releaseId)
+        public static EntityListResult<Milestone> GetMilestonesByRelease(string releaseId)
         {
             List<String> fields = new List<string>();
             fields.Add(Milestone.NAME_FIELD);
@@ -100,7 +95,7 @@ namespace SharedCalendar
         }
 
         // return all not done defects
-        public static GroupResult GetAllDefectWithGroupBy(long releaseId)
+        public static GroupResult GetAllDefectWithGroupBy(string releaseId)
         {
             List<String> fields = new List<string>();
             fields.Add(WorkItem.NAME_FIELD);
@@ -124,7 +119,7 @@ namespace SharedCalendar
         }
 
         // return all not done user user stories
-        public static GroupResult GetAllStoriesWithGroupBy(long releaseId)
+        public static GroupResult GetAllStoriesWithGroupBy(string releaseId)
         {
             List<String> fields = new List<string>();
             fields.Add(WorkItem.NAME_FIELD);

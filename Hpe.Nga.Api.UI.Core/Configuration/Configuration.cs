@@ -125,11 +125,11 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
             return lValue;
         }
 
-        public long SharedSpaceId
+        public string SharedSpaceId
         {
             get
             {
-                return GetIdAsLong(SHARED_SPACE_ID_FIELD);
+                return GetStringValue(SHARED_SPACE_ID_FIELD);
             }
             set
             {
@@ -152,11 +152,11 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
         }
 
 
-        public long WorkspaceId
+        public string WorkspaceId
         {
             get
             {
-                return GetIdAsLong(WORKSPACE_ID_FIELD);
+                return GetStringValue(WORKSPACE_ID_FIELD);
             }
             set
             {
@@ -178,11 +178,11 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
 
         }
 
-        public long ReleaseId
+        public string ReleaseId
         {
             get
             {
-                return GetIdAsLong(RELEASE_ID_FIELD);
+                return GetStringValue(RELEASE_ID_FIELD);
             }
             set
             {

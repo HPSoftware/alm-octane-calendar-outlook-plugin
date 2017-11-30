@@ -236,7 +236,7 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
       if (sharedSpaces == null)
       {
         SharedSpace defaultSharedSpace = new SharedSpace();
-        defaultSharedSpace.Id = 1001;
+        defaultSharedSpace.Id = "1001";
         defaultSharedSpace.Name = "Default shared space";
 
         sharedSpaces = new EntityListResult<SharedSpace>();
@@ -279,20 +279,20 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
       combo.Enabled = true;
     }
 
-    private void LoadWorkspaces(long sharedSpaceId)
+    private void LoadWorkspaces(string sharedSpaceId)
     {
       try
       {
-        WorkspaceContext defaultWorkspaceContext = new WorkspaceContext(sharedSpaceId, 1002);
+        WorkspaceContext defaultWorkspaceContext = WorkspaceContext.Create(sharedSpaceId, "1002");
         LogicalQueryPhrase byName = new LogicalQueryPhrase(WorkspaceUser.NAME_FIELD, txtName.Text);
         List<QueryPhrase> queries = new List<QueryPhrase>();
         queries.Add(byName);
 
         EntityListResult<WorkspaceUser> users = EntityService.Get<WorkspaceUser>(defaultWorkspaceContext, queries, null);
-        long userId = users.data[0].Id;
+        string userId = users.data[0].Id;
 
 
-        SharedSpaceContext context = new SharedSpaceContext(sharedSpaceId);
+        SharedSpaceContext context = SharedSpaceContext.Create(sharedSpaceId);
 
 
         LogicalQueryPhrase byUserId = new LogicalQueryPhrase(WorkspaceUser.ID_FIELD, userId);
@@ -305,16 +305,16 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
 
         FillCombo<Workspace>(cmbWorkspace, workspaces.data);
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         lblStatus.Text = "Failed to load workspaces";
         lblStatus.ForeColor = Color.Red;
       }
     }
 
-    private void LoadReleases(long sharedSpaceId, long workspaceId)
+    private void LoadReleases(string sharedSpaceId, string workspaceId)
     {
-      WorkspaceContext context = new WorkspaceContext(sharedSpaceId, workspaceId);
+      WorkspaceContext context = WorkspaceContext.Create(sharedSpaceId, workspaceId);
       EntityListResult<Release> result = EntityService.Get<Release>(context);
 
       if (result != null)

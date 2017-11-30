@@ -34,7 +34,7 @@
     <PublishUrl>C:\dev\SharedCalendar\publish\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>12.55.3.0</ApplicationVersion>
+    <ApplicationVersion>12.55.9.0</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -134,8 +134,8 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="Hpe.Nga.Api.Core, Version=12.55.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hpe.Nga.Api.Core.12.55.3\lib\net45\Hpe.Nga.Api.Core.dll</HintPath>
+    <Reference Include="Hpe.Nga.Api.Core, Version=12.55.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hpe.Nga.Api.Core.12.55.9\lib\net45\Hpe.Nga.Api.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

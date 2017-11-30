@@ -8,13 +8,8 @@
 
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using Outlook = Microsoft.Office.Interop.Outlook;
-using Office = Microsoft.Office.Core;
+
+using Hpe.Nga.Api.Core.Connector;
 
 namespace SharedCalendar
 {
@@ -22,6 +17,9 @@ namespace SharedCalendar
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            NetworkSettings.EnableAllSecurityProtocols();
+            NetworkSettings.IgnoreServerCertificateValidation();
+            RestConnector.AwaitContinueOnCapturedContext = false;
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

@@ -4,3 +4,5 @@ Release
 *.user
 publish
 packages
+.vs
+*.nugetreferenceswitcher

@@ -23,7 +23,7 @@ using System.Security;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Hewlett Packard Enterprise")]
 [assembly: AssemblyProduct("SharedCalendar")]
-[assembly: AssemblyCopyright("Copyright © Hewlett Packard Enterprise 2016")]
+[assembly: AssemblyCopyright("Copyright © Hewlett Packard Enterprise 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

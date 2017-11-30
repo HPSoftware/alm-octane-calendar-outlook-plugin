@@ -132,7 +132,7 @@ namespace SharedCalendar
           MessageBox.Show(str, "Sync completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
       }
-      catch (ServerUnavailableException ex)
+      catch (ServerUnavailableException)
       {
         ShowServerIsNotAvailableMsg();
       }
@@ -153,7 +153,7 @@ namespace SharedCalendar
         GroupResult usGroupResult = NgaUtils.GetAllStoriesWithGroupBy(release.Id);
         OutlookSyncUtils.getReleaseMailReport(release, groupResult, usGroupResult);
       }
-      catch (ServerUnavailableException ex)
+      catch (ServerUnavailableException)
       {
         ShowServerIsNotAvailableMsg();
       }

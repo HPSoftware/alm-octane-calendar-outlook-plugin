@@ -70,7 +70,7 @@ namespace SharedCalendar
       }
     }
 
-    public static AppointmentItem AddAppointment(String calendarName, String subject, DateTime startDate, DateTime endDate, String categories, int reminderMinutesBeforeStart, Boolean reminderSet, Dictionary<String, Object> customFields, bool save)
+    public static AppointmentItem AddAppointment(String calendarName, String subject, DateTime startDate, DateTime endDate, String categories, int reminderMinutesBeforeStart, Boolean reminderSet, Dictionary<string, string> customFields, bool save)
     {
       var calendar = GetSyncCalendarFolder(calendarName);
       AppointmentItem newAppointment = (AppointmentItem)calendar.Items.Add(OlItemType.olAppointmentItem);
@@ -91,10 +91,10 @@ namespace SharedCalendar
 
       if (customFields != null)
       {
-        foreach (KeyValuePair<String, object> keyValue in customFields)
+        foreach (KeyValuePair<string, string> keyValue in customFields)
         {
-          newAppointment.UserProperties.Add(keyValue.Key, OlUserPropertyType.olText, true, Type.Missing);
-          newAppointment.UserProperties[keyValue.Key].Value = keyValue.Value;
+            UserProperty userProperty = newAppointment.UserProperties.Add(keyValue.Key, OlUserPropertyType.olText, true, Type.Missing);
+            userProperty.Value = keyValue.Value;
         }
       }
 

@@ -218,6 +218,7 @@
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
+
     <None Include="SharedCalendar_TemporaryKey.pfx" />
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
@@ -279,7 +280,7 @@
     <ManifestKeyFile>SharedCalendar_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>006E07EC342F5ED0613546CECACA0917687220BC</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3D756EB669F2FEADF7C33D600F45EAD183CE9840</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

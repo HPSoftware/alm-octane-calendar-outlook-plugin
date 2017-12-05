@@ -219,7 +219,7 @@
       <SubType>Code</SubType>
     </Compile>
     <None Include="SharedCalendar_1_TemporaryKey.pfx" />
-    <None Include="SharedCalendar_TemporaryKey.pfx" />
+
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
     </None>

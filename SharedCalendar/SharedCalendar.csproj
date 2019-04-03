@@ -278,7 +278,7 @@
     <ManifestKeyFile>SharedCalendar_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>DF98782711357909E01DA77048FA0A8B6976B050</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3864D34579FA4BD3C39CAB0CD8B85AD09CD33719</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

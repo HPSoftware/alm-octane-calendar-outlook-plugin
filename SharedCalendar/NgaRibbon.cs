@@ -8,30 +8,26 @@
 
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
+using Hpe.Nga.Api.UI.Core.Configuration;
+using MicroFocus.Adm.Octane.Api.Core.Connector.Exceptions;
+using MicroFocus.Adm.Octane.Api.Core.Entities;
+using MicroFocus.Adm.Octane.Api.Core.Services;
+using MicroFocus.Adm.Octane.Api.Core.Services.GroupBy;
+using Microsoft.Office.Core;
+using SharedCalendar.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
-using Hpe.Nga.Api.Core.Connector;
-using Hpe.Nga.Api.Core.Entities;
-using Hpe.Nga.Api.Core.Services;
-using Hpe.Nga.Api.Core.Services.RequestContext;
-using Hpe.Nga.Api.UI.Core.Configuration;
-using Microsoft.Office.Core;
-using Microsoft.Office.Tools.Ribbon;
-using SharedCalendar.Properties;
-using Hpe.Nga.Api.Core.Services.GroupBy;
 using Office = Microsoft.Office.Core;
-using Hpe.Nga.Api.Core.Connector.Exceptions;
+
 
 namespace SharedCalendar
 {
-  [ComVisible(true)]
+    [ComVisible(true)]
   public class NgaRibbon : Office.IRibbonExtensibility
   {
     #region Fields

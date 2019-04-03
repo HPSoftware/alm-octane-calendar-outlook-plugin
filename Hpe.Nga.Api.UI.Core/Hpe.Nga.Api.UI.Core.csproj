@@ -31,9 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Hpe.Nga.Api.Core, Version=12.55.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hpe.Nga.Api.Core.12.55.9\lib\net45\Hpe.Nga.Api.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MicroFocus.Adm.Octane.Api.Core, Version=12.60.35.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroFocus.Adm.Octane.Api.Core.12.60.35\lib\net45\MicroFocus.Adm.Octane.Api.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

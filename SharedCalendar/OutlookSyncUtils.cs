@@ -8,21 +8,20 @@
 
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
+using MicroFocus.Adm.Octane.Api.Core.Entities;
+using MicroFocus.Adm.Octane.Api.Core.Services;
+using MicroFocus.Adm.Octane.Api.Core.Services.GroupBy;
+using Microsoft.Office.Interop.Outlook;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using Hpe.Nga.Api.Core.Entities;
-using Hpe.Nga.Api.Core.Services;
-using Microsoft.Office.Interop.Outlook;
-using Hpe.Nga.Api.Core.Services.GroupBy;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace SharedCalendar
 {
-	public class OutlookSyncUtils
+    public class OutlookSyncUtils
 	{
 		public static void SyncSprintsToOutlook(String calendarName, Release release, EntityListResult<Sprint> sprints)
 		{
@@ -181,7 +180,7 @@ namespace SharedCalendar
 			foreach (Milestone milestone in milestonesMap.Values)
 			{
 				Dictionary<string, string> customFields = new Dictionary<string, string>();
-				customFields.Add(OutlookUtils.APPOINTMENT_RELEASE_ID_FIELD, ((Release)(milestone.Releases.data.ElementAt<BaseEntity>(0))).Id);
+				customFields.Add(OutlookUtils.APPOINTMENT_RELEASE_ID_FIELD, milestone.Release.Id);
 				customFields[OutlookUtils.APPOINTMENT_MILESTONE_ID_FIELD] = milestone.Id;
 				String milestoneName = getMilestoneAppointmentName(milestone);
 				MilestoneDataContainer msExtraData = getMilestoneData(milestone);
@@ -255,7 +254,7 @@ namespace SharedCalendar
 
 		private static String getMilestoneAppointmentName(Milestone milestone)
 		{
-			return ((Release)(milestone.Releases.data.ElementAt<BaseEntity>(0))).Name + " " + milestone.Name;
+			return milestone.Release.Name + " " + milestone.Name;
 		}
 		public static void getReleaseMailReport(Release release, GroupResult groupResult, GroupResult usGroupResult)
 		{

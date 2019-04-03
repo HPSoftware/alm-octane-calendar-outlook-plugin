@@ -10,9 +10,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Hpe.Nga.Api.Core.Services.Core;
 
 namespace Hpe.Nga.Api.UI.Core.Configuration
 {

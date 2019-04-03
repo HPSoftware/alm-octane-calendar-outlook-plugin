@@ -8,24 +8,22 @@
 
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
+using MicroFocus.Adm.Octane.Api.Core.Connector;
+using MicroFocus.Adm.Octane.Api.Core.Entities;
+using MicroFocus.Adm.Octane.Api.Core.Services;
+using MicroFocus.Adm.Octane.Api.Core.Services.Query;
+using MicroFocus.Adm.Octane.Api.Core.Services.RequestContext;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Hpe.Nga.Api.Core.Connector;
-using Hpe.Nga.Api.Core.Entities;
-using Hpe.Nga.Api.Core.Services;
-using Hpe.Nga.Api.Core.Services.Query;
-using Hpe.Nga.Api.Core.Services.RequestContext;
+
 
 namespace Hpe.Nga.Api.UI.Core.Configuration
 {
-  public partial class SettingsForm : Form
+    public partial class SettingsForm : Form
   {
     private const int WM_NCHITTEST = 0x84;
     private const int HTCLIENT = 0x1;

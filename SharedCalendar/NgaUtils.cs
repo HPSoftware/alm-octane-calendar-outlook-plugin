@@ -8,18 +8,15 @@
 
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
+using Hpe.Nga.Api.UI.Core.Configuration;
+using MicroFocus.Adm.Octane.Api.Core.Entities;
+using MicroFocus.Adm.Octane.Api.Core.Services;
+using MicroFocus.Adm.Octane.Api.Core.Services.GroupBy;
+using MicroFocus.Adm.Octane.Api.Core.Services.Query;
+using MicroFocus.Adm.Octane.Api.Core.Services.RequestContext;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hpe.Nga.Api.Core.Entities;
-using Hpe.Nga.Api.Core.Services;
-using Hpe.Nga.Api.Core.Services.Query;
-using Hpe.Nga.Api.Core.Services.RequestContext;
-using Hpe.Nga.Api.Core.Services.GroupBy;
-using Hpe.Nga.Api.UI.Core.Configuration;
 
 namespace SharedCalendar
 {
@@ -81,12 +78,12 @@ namespace SharedCalendar
             List<String> fields = new List<string>();
             fields.Add(Milestone.NAME_FIELD);
             fields.Add(Milestone.DATE_FIELD);
-            fields.Add(Milestone.RELEASES_FIELD);
+            fields.Add(Milestone.RELEASE_FIELD);
             fields.Add(Milestone.DESCRIPTION_FIELD);
 
             List<QueryPhrase> queryPhrases = new List<QueryPhrase>();
             QueryPhrase releaseIdPhrase = new LogicalQueryPhrase("id", releaseId);
-            QueryPhrase byReleasePhrase = new CrossQueryPhrase(Milestone.RELEASES_FIELD, releaseIdPhrase);
+            QueryPhrase byReleasePhrase = new CrossQueryPhrase(Milestone.RELEASE_FIELD, releaseIdPhrase);
 
             queryPhrases.Add(byReleasePhrase);
 

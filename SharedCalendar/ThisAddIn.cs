@@ -9,7 +9,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 
-using Hpe.Nga.Api.Core.Connector;
+using MicroFocus.Adm.Octane.Api.Core.Connector;
 
 namespace SharedCalendar
 {

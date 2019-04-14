@@ -210,25 +210,19 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
             }
             catch (Exception e)
             {
+                Exception innerException = e.InnerException ?? e;
                 String exMessage = "";
-                if (e.Message.Contains("401"))
+                if (innerException.Message.Contains("401"))
                 {
                     exMessage = "Failed to authenticate. Validate your username and password.";
                 }
-                else if (e.Message.Contains("404"))
+                else if (innerException.Message.Contains("404"))
                 {
-                    exMessage = "Connection URL is invalid. Expected url format: http://<domain>:<port>";
+                    exMessage = "Failed to authenticate. Validate connection URL is in format http://<domain>:<port>";
                 }
                 else
                 {
-                    if (e.InnerException != null)
-                    {
-                        exMessage = "Failed to authenticate : " + e.InnerException.Message;
-                    }
-                    else
-                    {
-                        exMessage = "Failed to authenticate : " + e.Message;
-                    }
+                    exMessage = "Failed to authenticate : " + innerException.Message;
                 }
                 lblStatus.Text = exMessage;
                 lblStatus.ForeColor = Color.Red;

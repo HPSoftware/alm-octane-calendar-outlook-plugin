@@ -226,7 +226,7 @@
             this.btnAuthenticate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAuthenticate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAuthenticate.ForeColor = System.Drawing.Color.White;
-            this.btnAuthenticate.Location = new System.Drawing.Point(136, 235);
+            this.btnAuthenticate.Location = new System.Drawing.Point(103, 235);
             this.btnAuthenticate.Name = "btnAuthenticate";
             this.btnAuthenticate.Size = new System.Drawing.Size(259, 40);
             this.btnAuthenticate.TabIndex = 14;
@@ -256,7 +256,7 @@
             this.txtPassword.MinimumSize = new System.Drawing.Size(2, 29);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(368, 29);
+            this.txtPassword.Size = new System.Drawing.Size(368, 24);
             this.txtPassword.TabIndex = 12;
             this.txtPassword.TextChanged += new System.EventHandler(this.OnLoginSettingsChanged);
             // 

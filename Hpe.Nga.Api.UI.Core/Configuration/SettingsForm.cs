@@ -221,7 +221,14 @@ namespace Hpe.Nga.Api.UI.Core.Configuration
                 }
                 else
                 {
-                    exMessage = "Failed to authenticate : " + e.Message;
+                    if (e.InnerException != null)
+                    {
+                        exMessage = "Failed to authenticate : " + e.InnerException.Message;
+                    }
+                    else
+                    {
+                        exMessage = "Failed to authenticate : " + e.Message;
+                    }
                 }
                 lblStatus.Text = exMessage;
                 lblStatus.ForeColor = Color.Red;

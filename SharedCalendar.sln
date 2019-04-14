@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hpe.Nga.Api.UI.Core", "Hpe.Nga.Api.UI.Core\Hpe.Nga.Api.UI.Core.csproj", "{3CFA9560-885E-4475-BD8C-D7D9B314C618}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedCalendar", "SharedCalendar\SharedCalendar.csproj", "{09CE0249-8BFD-40EE-9BCD-6989579D0D80}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SharedCalendarSetup", "SharedCalendarSetup\SharedCalendarSetup.vdproj", "{96424543-0A8B-4B4A-A08B-8F2C1DC8B5E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,13 @@ Global
 		{09CE0249-8BFD-40EE-9BCD-6989579D0D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09CE0249-8BFD-40EE-9BCD-6989579D0D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09CE0249-8BFD-40EE-9BCD-6989579D0D80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96424543-0A8B-4B4A-A08B-8F2C1DC8B5E1}.Debug|Any CPU.ActiveCfg = Debug
+		{96424543-0A8B-4B4A-A08B-8F2C1DC8B5E1}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3020AFC8-FFF1-44B4-8325-2B6B6F75483C}
 	EndGlobalSection
 EndGlobal

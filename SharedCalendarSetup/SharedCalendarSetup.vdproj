@@ -22,7 +22,7 @@
         "Entry"
         {
         "MsmKey" = "8:_326455B690DCE2809BF5D32A53758BC3"
-        "OwnerKey" = "8:_653011252E5990EEFAAB70B0EEB95696"
+        "OwnerKey" = "8:_BE3E1817F2D7390A259BBDEB21117F5F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -35,12 +35,6 @@
         {
         "MsmKey" = "8:_5ABCF3F637B44FD6AAF787F5DD1E1A29"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_653011252E5990EEFAAB70B0EEB95696"
-        "OwnerKey" = "8:_5ABCF3F637B44FD6AAF787F5DD1E1A29"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -88,6 +82,12 @@
         "Entry"
         {
         "MsmKey" = "8:_BA893A3796EFEA3E61BF9B884C9433E4"
+        "OwnerKey" = "8:_5ABCF3F637B44FD6AAF787F5DD1E1A29"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BE3E1817F2D7390A259BBDEB21117F5F"
         "OwnerKey" = "8:_5ABCF3F637B44FD6AAF787F5DD1E1A29"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -184,7 +184,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_653011252E5990EEFAAB70B0EEB95696"
+        "OwnerKey" = "8:_BE3E1817F2D7390A259BBDEB21117F5F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -218,6 +218,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -325,37 +333,6 @@
                     }
                 }
             "SourcePath" = "8:MicroFocus.Adm.Octane.Api.Core.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_32DD71CA4B6A4817A754926829CAFD11"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_653011252E5990EEFAAB70B0EEB95696"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Hpe.Nga.Api.UI.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_653011252E5990EEFAAB70B0EEB95696"
-                    {
-                    "Name" = "8:Hpe.Nga.Api.UI.Core.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Hpe.Nga.Api.UI.Core.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_32DD71CA4B6A4817A754926829CAFD11"
@@ -520,6 +497,37 @@
                     }
                 }
             "SourcePath" = "8:Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_32DD71CA4B6A4817A754926829CAFD11"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BE3E1817F2D7390A259BBDEB21117F5F"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Hpe.Nga.Api.UI.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_BE3E1817F2D7390A259BBDEB21117F5F"
+                    {
+                    "Name" = "8:Hpe.Nga.Api.UI.Core.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Hpe.Nga.Api.UI.Core.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_32DD71CA4B6A4817A754926829CAFD11"
@@ -1122,7 +1130,7 @@
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:"
+                            "Value" = "8:If Outlook is open, please restart Outlook to see the ALM Octane tab."
                             "DefaultValue" = "8:#1258"
                             "UsePlugInResources" = "11:TRUE"
                             }

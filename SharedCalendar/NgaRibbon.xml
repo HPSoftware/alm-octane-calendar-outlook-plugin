@@ -2,7 +2,7 @@
 <customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
   <ribbon>
     <tabs>
-      <tab id="ngaTab" label="OCTANE">
+      <tab id="ngaTab" label="ALM OCTANE">
         <group id="actions" label="Actions">
           <button id="btnConnect" getLabel="GetBtnConnectLable" showImage="false" onAction="OnLogin" size="large" getImage="imageConnect_GetImage" />
           <button id="btnSync" label="Sync" showImage="false" onAction="OnSync" size="large" getImage="imageSync_GetImage" getEnabled="GetIsLoggedIn"/>

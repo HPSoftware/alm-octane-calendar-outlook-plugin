@@ -69,7 +69,7 @@ namespace SharedCalendar
             queryPhrases.Add(byReleasePhrase);
 
             EntityListResult<Sprint> result = SettingsForm.EntityService.Get<Sprint>(workspaceContext, queryPhrases, fields);
-            Release release = result.data[0].Release;
+            //Release release = result.data[0].Release;
             return result;
         }
 

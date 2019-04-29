@@ -134,7 +134,7 @@ namespace SharedCalendar
       }
       catch (Exception e)
       {
-        String errorMsg = "Sync failed : " + e.Message + Environment.NewLine + e.StackTrace;
+        String errorMsg = "Sync failed : " + e.Message;
         MessageBox.Show(errorMsg, "Sync Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
     }
@@ -223,7 +223,7 @@ namespace SharedCalendar
     
     private void ShowServerIsNotAvailableMsg()
     {
-      MessageBox.Show("Server is not available", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      MessageBox.Show("ALM Octane server is not available", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     private void OnApplicationExit(object sender, EventArgs e)
